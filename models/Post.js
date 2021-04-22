@@ -5,10 +5,6 @@ const PostSchema = new Schema({
     title: String,
     category: String,
     description: String,
-    postOwner: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
-    },
     assignedTo: [{
         type: Schema.Types.ObjectId,
         ref: 'user'
@@ -34,6 +30,18 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'comment'
     }],
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    belongsToTeam: {
+        type: Schema.Types.ObjectId,
+        ref: 'team'
+    },
+    belongsToProject: {
+        type: schema.Types.ObjectId,
+        ref: 'project'
+    },
     createdAt: { type: Date, default: Date.now }
 })
 

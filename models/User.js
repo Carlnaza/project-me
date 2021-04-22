@@ -35,9 +35,25 @@ const UserSchema = new Schema({
     },
     profilePhoto: String,
     languages: String,
+    activityHistory: [{
+        details: String,
+        project: {
+            type: Schema.Types.ObjectId,
+            ref: 'project'
+        },
+        comment: {
+            type: Schema.Types.ObjectId,
+            ref: 'comment'
+        },
+        createdAt: { type: date, default: Date.now }
+    }],
     teams: [{
         type: Schema.Types.ObjectId,
         ref: 'team'
+    }],
+    favorites: [{
+        type: Schema.Types.ObjectId,
+        ref: 'project'
     }],
     projects: [{
         type: Schema.Types.ObjectId,

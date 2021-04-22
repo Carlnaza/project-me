@@ -4,6 +4,7 @@ const TeamSchema = new Schema({
     isPrivate: Boolean,
     title: String,
     profileImg: String,
+    previousImages: [String],
     members: [{
         type: Schema.Types.ObjectId,
         ref: 'user'

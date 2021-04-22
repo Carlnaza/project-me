@@ -4,6 +4,7 @@ const ProjectSchema = new Schema({
     isPrivate: Boolean,
     title: String,
     description: String,
+    category: String,
     posts: [{
         type: Schema.Types.ObjectId,
         ref: 'post'
@@ -12,9 +13,17 @@ const ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
-    assignedTo: [{
+    assignedToTeam: {
+        type: Schema.Types.ObjectId,
+        ref: 'team'
+    },
+    assignedToUser: [{
         type: Schema.Types.ObjectId,
         ref: 'user'
+    }],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'comment'
     }],
     viewers: [{
         type: Schema.Types.ObjectId,
