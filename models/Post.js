@@ -42,7 +42,7 @@ const PostSchema = new Schema({
         ref: 'team'
     },
     belongsToProject: {
-        type: schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'project'
     },
     createdAt: { type: Date, default: Date.now }

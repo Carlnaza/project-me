@@ -11,14 +11,6 @@ const ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'category'
     }],
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'post'
-    }],
-    projectOwner: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
-    },
     assignedToTeam: {
         type: Schema.Types.ObjectId,
         ref: 'team'
@@ -35,6 +27,10 @@ const ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     }],
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
     createdAt: { type: Date, default: Date.now }
 })
 
