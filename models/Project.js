@@ -2,9 +2,15 @@ const { model, Schema } = require('mongoose')
 
 const ProjectSchema = new Schema({
     isPrivate: Boolean,
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     description: String,
-    category: String,
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'category'
+    }],
     posts: [{
         type: Schema.Types.ObjectId,
         ref: 'post'

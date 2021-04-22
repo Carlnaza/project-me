@@ -3,7 +3,10 @@ const { model, Schema } = require('mongoose')
 const PostSchema = new Schema({
     isArchived: Boolean,
     title: String,
-    category: String,
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'category'
+    },
     description: String,
     assignedTo: [{
         type: Schema.Types.ObjectId,
