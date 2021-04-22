@@ -6,7 +6,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    date_of_birth: {
+    dateOfBirth: {
         type: Date,
         trim: true
     },
@@ -33,8 +33,24 @@ const UserSchema = new Schema({
         zip_code: Number,
         country: String
     },
-    profile_photo: String,
+    profilePhoto: String,
     languages: String,
+    teams: [{
+        type: Schema.Types.ObjectId,
+        ref: 'team'
+    }],
+    projects: [{
+        type: Schema.Types.ObjectId,
+        ref: 'project'
+    }],
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'posts'
+    }],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'comments'
+    }],
     createdAt: { type: Date, default: Date.now }
 })
 

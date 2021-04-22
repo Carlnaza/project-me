@@ -10,11 +10,6 @@ router.post('/users/register', async (req, res) => {
     let nonViaChars = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/)
 
     // Check if any of the inputs are empty
-    // if (!req.body.username) {
-    //     errors.username = "A username is required to register."
-    // } else if (nonViaChars.test(req.body.username)) {
-    //     errors.username = "Usernames cannot have special characters and spaces, please enter a new one."
-    // }
     if (!req.body.name) {
         errors.name = "Please enter a valid name"
     }
@@ -49,10 +44,9 @@ router.post('/users/register', async (req, res) => {
 
     await User.register(new User({
         isAdmin: false,
-        // username: lowCaseUName,
         name: req.body.name,
         email: req.body.email,
-        date_of_birth: req.body.date_of_birth,
+        dateOfBirth: req.body.dateOfBirth,
         phone: req.body.phone,
         languages: "English",
     }), req.body.password, (err, data) => {
