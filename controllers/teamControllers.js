@@ -2,17 +2,23 @@ const router = require('express').Router()
 const passport = require('passport')
 
 // Models
-const { Team } = require('../models')
+const { Team, User } = require('../models')
 
 // Create a TEAM
 router.post('/team', passport.authenticate('jwt'), async (req, res) => {
 
+    let team
     try {
 
-        await Team.create({
+        team = await Team.create({
             isPrivate: req.body.isPrivate,
             title: req.body.title,
             members: req.user._id
+        })
+        await User.findByIdAndUpdate(req.user._id, {
+            $push: {
+                teams: team._id
+            }
         })
 
     } catch (err) {

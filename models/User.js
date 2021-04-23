@@ -35,6 +35,9 @@ const UserSchema = new Schema({
     },
     profilePhoto: String,
     languages: String,
+    assignedItems: [{
+        type: Schema.Types.ObjectId
+    }],
     activityHistory: [{
         details: String,
         project: {

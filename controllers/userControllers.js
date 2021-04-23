@@ -155,4 +155,30 @@ router.put('/user/profile', passport.authenticate('jwt'), async (req, res) => {
 
 })
 
+// Get all user Data
+router.get('/user', passport.authenticate('jwt'), async (req, res) => {
+
+    let user
+    try {
+
+        user = await User.findById(req.user._id)
+            .populate({
+                path: 'projects',
+                model: 'project',
+                populate: {
+                    path: 'categories',
+                    model: 'category'
+                }
+            })
+            .populate({ path: 'teams', model: 'team' })
+
+    } catch (err) {
+        res.json(err)
+
+        return
+    }
+
+    res.json(user)
+})
+
 module.exports = router
