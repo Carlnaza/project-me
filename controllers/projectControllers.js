@@ -1,6 +1,5 @@
 const router = require('expres').Router()
 const passport = require('passport')
-const jwt = require('jsonwebtoken')
 
 // Models
 const { Project, User, Team } = require('../models')
