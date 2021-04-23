@@ -1,4 +1,4 @@
-const router = require('expres').Router()
+const router = require('express').Router()
 const passport = require('passport')
 
 // Models
@@ -14,7 +14,8 @@ router.post('/project', passport.authenticate('jwt'), async (req, res) => {
             isPrivate: req.body.isPrivate,
             title: req.body.title,
             description: req.body.description,
-            cratedBy: req.user._id
+            assignedToTeam: req.body.teamId,
+            createdBy: req.user._id
         })
         await Team.findByIdAndUpdate(req.body.teamId, {
             $push: {
