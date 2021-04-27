@@ -30,11 +30,14 @@ const UserSchema = new Schema({
         line1: String,
         line2: String,
         city: String,
-        zip_code: Number,
+        zipCode: Number,
         country: String
     },
     profilePhoto: String,
     languages: String,
+    assignedItems: [{
+        type: Schema.Types.ObjectId
+    }],
     activityHistory: [{
         details: String,
         project: {
@@ -45,7 +48,7 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'comment'
         },
-        createdAt: { type: date, default: Date.now }
+        createdAt: { type: Date, default: Date.now }
     }],
     teams: [{
         type: Schema.Types.ObjectId,
@@ -59,14 +62,11 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'project'
     }],
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'posts'
-    }],
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comments'
     }],
+    lastUpdated: Date,
     createdAt: { type: Date, default: Date.now }
 })
 

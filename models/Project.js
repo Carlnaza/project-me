@@ -2,17 +2,15 @@ const { model, Schema } = require('mongoose')
 
 const ProjectSchema = new Schema({
     isPrivate: Boolean,
-    title: String,
-    description: String,
-    category: String,
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'post'
-    }],
-    projectOwner: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
+    title: {
+        type: String,
+        required: true
     },
+    description: String,
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'category'
+    }],
     assignedToTeam: {
         type: Schema.Types.ObjectId,
         ref: 'team'
@@ -29,6 +27,10 @@ const ProjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     }],
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    },
     createdAt: { type: Date, default: Date.now }
 })
 

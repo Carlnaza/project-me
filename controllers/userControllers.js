@@ -1,7 +1,9 @@
 const router = require('express').Router()
-const { User } = require('../models')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
+
+// Models
+const { User } = require('../models')
 
 // Registration Route
 router.post('/users/register', async (req, res) => {
@@ -48,7 +50,7 @@ router.post('/users/register', async (req, res) => {
         email: req.body.email,
         dateOfBirth: req.body.dateOfBirth,
         phone: req.body.phone,
-        languages: "English",
+        languages: "EN",
     }), req.body.password, (err, data) => {
 
         // If any errors, return errors
@@ -117,6 +119,66 @@ router.post('/users/login', async (req, res) => {
         message: `Successfully logged in ${data.user.email}`,
         token: jwt.sign({ id: data.user._id }, process.env.SECRET)
     })
+})
+
+// Edit Profile Route
+router.put('/user/profile', passport.authenticate('jwt'), async (req, res) => {
+
+    try {
+
+        await User.findByIdAndUpdate(req.user._id, {
+            name: req.body.name,
+            dateOfBirth: req.body.dateOfBirth,
+            gender: req.body.gender,
+            username: req.body.username,
+            phone: req.body.phone,
+            address: {
+                line1: req.body.address.line1,
+                line2: req.body.address.line2,
+                city: req.body.address.city,
+                zipCode: req.body.address.zipCode,
+                country: req.body.address.country
+            },
+            lastUpdated: Date.now()
+        })
+
+    } catch (err) {
+        res.json(err)
+
+        return
+    }
+
+    res.json({
+        status: 200,
+        message: "Profile information has been updated."
+    })
+
+})
+
+// Get all user Data
+router.get('/user', passport.authenticate('jwt'), async (req, res) => {
+
+    let user
+    try {
+
+        user = await User.findById(req.user._id)
+            .populate({
+                path: 'projects',
+                model: 'project',
+                populate: {
+                    path: 'categories',
+                    model: 'category'
+                }
+            })
+            .populate({ path: 'teams', model: 'team' })
+
+    } catch (err) {
+        res.json(err)
+
+        return
+    }
+
+    res.json(user)
 })
 
 module.exports = router
