@@ -62,10 +62,6 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'project'
     }],
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'posts'
-    }],
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comments'

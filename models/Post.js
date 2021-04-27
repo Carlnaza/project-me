@@ -3,7 +3,7 @@ const { model, Schema } = require('mongoose')
 const PostSchema = new Schema({
     isArchived: Boolean,
     title: String,
-    category: {
+    belongsToCategory: {
         type: Schema.Types.ObjectId,
         ref: 'category'
     },
@@ -27,7 +27,8 @@ const PostSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'user'
         },
-        details: String
+        details: String,
+        time: Date
     }],
     comments: [{
         type: Schema.Types.ObjectId,
