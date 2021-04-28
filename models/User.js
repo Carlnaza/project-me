@@ -13,7 +13,10 @@ const UserSchema = new Schema({
     gender: String,
     username: {
         type: String,
-        unique: true
+        index: {
+            unique: true,
+            sparse: true
+        }
     },
     email: {
         type: String,
