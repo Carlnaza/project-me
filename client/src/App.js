@@ -1,35 +1,35 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { Home, Login, Register } from './pages'
 import { LockedPage } from './utils'
 
 function App() {
   return (
-    <>
-      {/* NavBar Space */}
+
+    <div>
+
+      <Router>
+        <Switch>
+
+          <Route exact path='/'>
+            <Redirect to='/home' />
+          </Route>
+          <Route exact path='/home'>
+            <LockedPage>
+              <Home />
+            </LockedPage>
+          </Route>
+
+          {/* Login/Registration */}
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
 
 
-      {/* Main App */}
-      <Switch>
-        <Route exact path='/'>
-          <Redirect to='/home' />
-        </Route>
-        <Route exact path='/home'>
-          <LockedPage>
-            <Home />
-          </LockedPage>
-        </Route>
+        </Switch>
+      </Router>
 
-        {/* Login/Registration */}
-        <Route exact path='/login' component={login} />
-        <Route exact path='/register' component={register} />
+    </div>
 
 
-
-
-      </Switch>
-      {/* Footer Space */}
-
-    </>
   );
 }
 
