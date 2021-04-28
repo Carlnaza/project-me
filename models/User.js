@@ -38,6 +38,14 @@ const UserSchema = new Schema({
     },
     profilePhoto: String,
     languages: String,
+    following: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }],
+    followers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }],
     assignedItems: [{
         type: Schema.Types.ObjectId
     }],

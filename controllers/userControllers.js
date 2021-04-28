@@ -181,4 +181,43 @@ router.get('/user', passport.authenticate('jwt'), async (req, res) => {
     res.json(user)
 })
 
+// Follow a User (:id ID of USER being followed)
+router.put('/user/follow/:id', passport.authenticate('jwt'), async (req, res) => {
+
+    let followingUser
+    let userReply
+    try {
+
+        followingUser = await User.findByIdAndUpdate(req.params.id, {
+            $push: {
+                followers: req.user._id
+            }
+        })
+        await User.findByIdAndUpdate(req.user._id, {
+            $push: {
+                following: followingUser._id
+            }
+        })
+
+    } catch (err) {
+        res.json(err)
+
+        return
+    }
+
+    if (followingUser.name) {
+        userReply = followingUser.name
+    } else if (followingUser.username) {
+        userReply = followingUser.username
+    } else if (followingUser.email) {
+        userReply = followingUser.email
+    }
+
+    res.json({
+        status: 200,
+        message: `You are now following ${userReply}`
+    })
+
+})
+
 module.exports = router
