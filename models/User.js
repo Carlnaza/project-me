@@ -57,6 +57,10 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'team'
     }],
+    viewingProjects: [{
+        type: Schema.Types.ObjectId,
+        ref: 'project'
+    }],
     favorites: [{
         type: Schema.Types.ObjectId,
         ref: 'project'
