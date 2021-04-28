@@ -92,7 +92,7 @@ router.post('/users/login', async (req, res) => {
     let lowCaseEmail = req.body.email.toLowerCase()
     let data = await User.authenticate()(lowCaseEmail, req.body.password)
 
-    if (!req.body.password && !req.body.username) {
+    if (!req.body.password && !req.body.email) {
         errors.input = "Username and password is required."
         res.json({ status: 400, data: errors })
 
