@@ -136,9 +136,9 @@ const Register = () => {
                 onChange={handleRegisterInput}
               />
             </Grid>
+            <Button type='submit' onClick={handleRegisterSubmit}>Submit</Button>
+            <Link to='/login'>Already Registered? Login Here</Link>
           </form>
-          <Button onClick={handleRegisterSubmit}>Submit</Button>
-          <Link to='/login'>Already Registered? Login Here</Link>
         </Card>
       </Container>
     </main>

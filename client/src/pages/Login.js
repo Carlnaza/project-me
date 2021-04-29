@@ -78,9 +78,9 @@ const Login = () => {
                 onChange={handleLoginInput}
               />
             </Grid>
+            <Button type='submit' onClick={handleLoginSubmit}>Submit</Button>
+            <Link to='/register'>Don't Have an Account? Register Here</Link>
           </form>
-          <Button onClick={handleLoginSubmit}>Submit</Button>
-          <Link to='/register'>Don't Have an Account? Register Here</Link>
         </Card>
       </Container>
     </main>
