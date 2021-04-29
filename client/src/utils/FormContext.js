@@ -41,15 +41,15 @@ const FormContext = () => {
     const user = {
       name: register.name,
       email: register.email,
-      username: register.username,
+      // username: register.username,
       dateOfBirth: dob.valueOf(),
-      phone: parseInt(phone.replace(/\D/g, '')),
+      phone: phone ? parseInt(phone.replace(/\D/g, '')) : '',
       password: register.password,
       password2: register.password2
     }
 
     console.log(user)
-    let { data: response } = await User.register(user)
+    let response = await User.register(user)
     console.log(response)
     if (response.status === 400) {
       setErrors(response.data)
@@ -84,22 +84,23 @@ const FormContext = () => {
       password: login.password
     }
     console.log(user)
-    let { data: response } = await User.login(user)
+    let response = await User.login(user)
+    console.log(response)
+    // if (response.status === 400) {
+    //   setErrors(response.data)
+    // } else if (response.status == 200) {
+    //   setErrors({})
+    //   setLogin({
+    //     email: '',
+    //     password: ''
+    //   })
+    //   console.log(response.token)
+    //   localStorage.setItem('user', response.token)
+    //   // set logic so that snack alert is triggered with response.message if it contains success and login
+    //   // add time before being sent to home
+    //   // window.location = '/'
 
-    if (response.status === 400) {
-      setErrors(response.data)
-    } else if (response.status == 200) {
-      setErrors({})
-      setLogin({
-        email: '',
-        password: ''
-      })
-      console.log(response.token)
-      localStorage.setItem('user', response.token)
-      // set logic so that snack alert is triggered with response.message if it contains success and login
-      // add time before being sent to home
-      window.location = '/'
-    }
+    // }
   }
   // Login Functinality End
 
@@ -150,7 +151,7 @@ const FormContext = () => {
       phone: parseInt(phone.replace(/\D/g, ''))
     }
 
-    let { data: response } = await User.edit(user)
+    let response = await User.edit(user)
     console.log(response)
     if (response.status === 200) {
       toggleDisable()
