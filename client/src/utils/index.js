@@ -1,6 +1,6 @@
 export { default as FormContext } from "./FormContext"
 export { default as LockedPage } from "./LockedPage"
 export { default as User } from "./User"
-export { default as Project } from "./Project"
 export { default as Team } from "./Team"
+export { default as Project } from "./Project"
 export { default as Post } from "./Post"
