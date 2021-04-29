@@ -12,7 +12,7 @@ const User = {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
   }),
-  getUser: () => axios.get('/api/user', {
+  getData: () => axios.get('/api/user', {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
