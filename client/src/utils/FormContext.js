@@ -10,7 +10,8 @@ const FormContext = () => {
     email: '',
     username: '',
     password: '',
-    password2: ''
+    password2: '',
+    phone: ''
   })
 
   const [login, setLogin] = useState({
@@ -19,17 +20,20 @@ const FormContext = () => {
     password: ''
   })
 
+  const [edit, setEdit] = useState({})
   // DatePicker and MuiPhoneNumber doesn't work with target.name setup of handleinput
   const [dob, setDOB] = useState(new Date());
   const [phone, setPhone] = useState();
+  const [disabled, setDisabled] = useState(true);
 
-  const handleRegisterInput = ({ target }) => {
-    setRegister({ ...register, [target.name]: target.value })
-    console.log(register)
+  // Form Interaction Set to Disable
+  const toggleDisable = () => {
+    setDisabled(!disabled)
   }
 
-  const handleLoginInput = ({ target }) => {
-    setLogin({ ...login, [target.name]: target.value })
+  // Register Functinality Start
+  const handleRegisterInput = ({ target }) => {
+    setRegister({ ...register, [target.name]: target.value })
   }
 
   const handleRegisterSubmit = async (event) => {
@@ -49,7 +53,7 @@ const FormContext = () => {
     console.log(response)
     if (response.status === 400) {
       setErrors(response.data)
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       setErrors({})
       setRegister({
         name: '',
@@ -65,6 +69,12 @@ const FormContext = () => {
       // add time before being sent to login
       window.location = '/login'
     }
+  }
+  // Register Functinality End
+
+  // Login Functinality Start
+  const handleLoginInput = ({ target }) => {
+    setLogin({ ...login, [target.name]: target.value })
   }
 
   const handleLoginSubmit = async (event) => {
@@ -90,14 +100,74 @@ const FormContext = () => {
       // add time before being sent to home
       window.location = '/'
     }
-
   }
+  // Login Functinality End
+
+  // Load User Information for a Loaded Profile Form
+  const loadUser = async () => {
+    const { data } = await User.getData()
+    let user = {}
+    user.name = data.name ? data.name : ''
+    user.username = data.username ? data.name : ''
+    user.gender = data.gender ? data.name : ''
+    user.email = data.email ? data.email : ''
+    user.address = user.address ? {
+      line1: data.address.line1 ? data.address.line1 : '',
+      line2: data.address.line2 ? data.address.line2 : '',
+      city: data.address.city ? data.address.city : '',
+      zipCode: data.address.zipCode ? data.address.zipCode : '',
+      country: data.address.country ? data.address.country : ''
+    } : { line1: '', line2: '', city: '', zipCode: '', country: '' }
+    user.profilePhoto = data.profilePhoto ? data.profilePhoto : ''
+
+    setEdit(user)
+    setPhone(data.phone.toString())
+    setDOB(data.dateOfBirth)
+  }
+
+  // Profile Edit Functionality Start
+  const handleEditProfile = ({ target }) => {
+    let addressItems = ['line1', 'line2', 'city', 'zipCode', 'country']
+    if (addressItems.includes(target.name)) {
+      setEdit({ ...edit, address: { ...edit.address, [target.name]: target.value } })
+    } else {
+      setEdit({ ...edit, [target.name]: target.value })
+    }
+    console.log(edit)
+  }
+
+  const handleSubmitEdit = async (event) => {
+    event.preventDefault()
+    const user = {
+      name: edit.name,
+      email: edit.email,
+      username: edit.username,
+      gender: edit.gender,
+      username: edit.username,
+      profilePhoto: edit.profilePhoto,
+      address: edit.address,
+      dateOfBirth: dob.valueOf(),
+      phone: parseInt(phone.replace(/\D/g, ''))
+    }
+
+    let { data: response } = await User.edit(user)
+    console.log(response)
+    if (response.status === 200) {
+      toggleDisable()
+      console.log(response.status)
+    } else { console.log('Unable to Update User') }
+  }
+  // Profile Edit Functionality End
+
+
 
   return {
     register, setRegister, handleRegisterInput, handleRegisterSubmit,
     login, setLogin, handleLoginInput, handleLoginSubmit,
     dob, setDOB, phone, setPhone,
-    errors, setErrors
+    errors, setErrors,
+    loadUser, edit, setEdit, handleEditProfile, handleSubmitEdit,
+    toggleDisable, disabled
   }
 
 }
