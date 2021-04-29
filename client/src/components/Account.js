@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Card, Grid, Typography, TextField, Box, Button } from '@material-ui/core'
+import { Container, Card, Grid, Typography, TextField, Box, Button, FormControl, InputLabel, Select } from '@material-ui/core'
 
 import {
   KeyboardDatePicker,
@@ -29,8 +29,6 @@ const Account = (page) => {
 
   useEffect(() => {
     loadUser()
-    console.log(dob)
-    console.log(phone)
   }, [])
 
 
@@ -43,22 +41,40 @@ const Account = (page) => {
             <Typography variant="h4">
               Account Overview
             </Typography>
-
-            <TextField
-              disabled={disabled}
-              label="Full Name"
-              className={classes.input}
-              required
-              fullwidth
-              variant="outlined"
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name="name"
-              value={edit.name}
-              onChange={handleEditProfile}
-            />
+            <Box className={classes.centeredFlex}>
+              <TextField
+                disabled={disabled}
+                label="Full Name"
+                className={classes.input}
+                required
+                fullwidth
+                variant="outlined"
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="name"
+                value={edit.name}
+                onChange={handleEditProfile}
+              />
+              <FormControl variant="outlined" className={classes.input} disabled={disabled}>
+                <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
+                <Select
+                  native
+                  value={edit.gender}
+                  onChange={handleEditProfile}
+                  label="Gender"
+                  inputProps={{
+                    name: 'gender',
+                  }}
+                >
+                  {/* <option aria-label="None" value="" /> */}
+                  <option value={'Male'}>Male</option>
+                  <option value={'Female'}>Female</option>
+                  <option value={'Other'}>Other</option>
+                </Select>
+              </FormControl>
+            </Box>
             <Box className={classes.centeredFlex}>
               <MuiPickersUtilsProvider utils={DateFnsUtils} >
                 <KeyboardDatePicker
