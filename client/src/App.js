@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import { Home, Login, Register } from './pages'
+import { Home, Login, Register, Profile } from './pages'
+import Navbar from './components/Navbar'
 import { LockedPage } from './utils'
 
 function App() {
   return (
 
     <div>
-
+      <Navbar />
       <Router>
         <Switch>
 
@@ -16,6 +17,11 @@ function App() {
           <Route exact path='/home'>
             <LockedPage>
               <Home />
+            </LockedPage>
+          </Route>
+          <Route exact path='/profile'>
+            <LockedPage>
+              <Profile />
             </LockedPage>
           </Route>
 
