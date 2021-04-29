@@ -111,7 +111,7 @@ const FormContext = () => {
     user.username = data.username ? data.name : ''
     user.gender = data.gender ? data.name : ''
     user.email = data.email ? data.email : ''
-    user.address = user.address ? {
+    user.address = data.address ? {
       line1: data.address.line1 ? data.address.line1 : '',
       line2: data.address.line2 ? data.address.line2 : '',
       city: data.address.city ? data.address.city : '',
