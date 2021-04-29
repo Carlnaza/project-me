@@ -6,14 +6,18 @@ const styles = makeStyles((theme) => ({
   },
   loginCard: {
     justifyContent: 'center',
-    padding: '20px'
+    padding: '10px'
   },
   centeredFlex: {
     display: 'flex',
     justifyContent: 'space-between'
   },
-  halfInput: {
-    width: '48%'
+  input: {
+    margin: '10px 5px',
+    flex: 1
+  },
+  hide: {
+    display: 'none'
   }
 }))
 
