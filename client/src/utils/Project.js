@@ -1,41 +1,65 @@
 import axios from 'axios'
 
 const Project = {
-  create: (body) => axios.post('/api/project', body, {
+  create: (body) => fetch('/api/project', {
+    method: 'POST',
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem('user')}`
-    }
-  }),
-
-  edit: (projectId, body) => axios.put(`/api/project/${projectId}`, body, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('user')}`
-    }
-  }),
-
-  assignUser: (projectId, user) => axios.put(`/api/project/assign_user/${projectId}`, user, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('user')}`
-    }
-  }),
-
-  assignTeam: (projectId, team) => axios.put(`/api/project/assign_team/${projectId}`, team, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('user')}`
-    }
-  }),
-
-  comment: (projectId, comment) => axios.put(`/api/project/assign_team/${projectId}`, comment, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('user')}`
-    }
-  }),
-
-  addViewer: (projectId, viewer) => axios.put(`/api/project/assign_team/${projectId}`, viewer, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('user')}`
-    }
+    },
+    body: JSON.stringify(body)
   })
+    .then(response => response.json()),
+
+  edit: (projectId, body) => fetch(`/api/project/${projectId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem('user')}`
+    },
+    body: JSON.stringify(body)
+  })
+    .then(response => response.json()),
+
+  assignUser: (projectId, user) => fetch(`/api/project/assign_user/${projectId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem('user')}`
+    },
+    body: JSON.stringify(user)
+  })
+    .then(response => response.json()),
+
+  assignTeam: (projectId, team) => fetch(`/api/project/assign_team/${projectId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem('user')}`
+    },
+    body: JSON.stringify(team)
+  })
+    .then(response => response.json()),
+
+  comment: (projectId, comment) => fetch(`/api/project/assign_team/${projectId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem('user')}`
+    },
+    body: JSON.stringify(comment)
+  })
+    .then(response => response.json()),
+
+  addViewer: (projectId, viewer) => fetch(`/api/project/assign_team/${projectId}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem('user')}`
+    },
+    body: JSON.stringify(viewer)
+  })
+    .then(response => response.json()),
 }
 
 export default Project
