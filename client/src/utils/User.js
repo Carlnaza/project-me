@@ -7,7 +7,7 @@ const User = {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
   }),
-  edit: (user) => axios.put('/api/users/profile', user, {
+  edit: (user) => axios.put('/api/user/profile', user, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
