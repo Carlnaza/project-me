@@ -30,6 +30,10 @@ const PostSchema = new Schema({
         details: String,
         time: Date
     }],
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }],
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comment'

@@ -13,7 +13,10 @@ const UserSchema = new Schema({
     gender: String,
     username: {
         type: String,
-        index: { unique: true, sparse: true }
+        index: {
+            unique: true,
+            sparse: true
+        }
     },
     email: {
         type: String,
@@ -35,6 +38,14 @@ const UserSchema = new Schema({
     },
     profilePhoto: String,
     languages: String,
+    following: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }],
+    followers: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }],
     assignedItems: [{
         type: Schema.Types.ObjectId
     }],
@@ -53,6 +64,10 @@ const UserSchema = new Schema({
     teams: [{
         type: Schema.Types.ObjectId,
         ref: 'team'
+    }],
+    viewingProjects: [{
+        type: Schema.Types.ObjectId,
+        ref: 'project'
     }],
     favorites: [{
         type: Schema.Types.ObjectId,

@@ -8,6 +8,10 @@ const CommentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+    }],
     createdAt: { type: Date, default: Date.now }
 })
 
