@@ -16,6 +16,11 @@ const User = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('user')}`
     }
+  }),
+  follow: (targetUser) => axios.put(`/api/user/follow/${targetUser}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('user')}`
+    }
   })
 }
 
