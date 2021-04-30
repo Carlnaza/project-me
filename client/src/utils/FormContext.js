@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { User } from '../utils'
+import { Redirect } from 'react-router-dom'
 
 const FormContext = () => {
 
@@ -67,10 +68,18 @@ const FormContext = () => {
       console.log(response)
       // set logic so that snack alert is triggered with response.message if it contains success and register
       // add time before being sent to login
-      window.location = '/login'
+      return <Redirect from='/login' to='/' />
     }
   }
   // Register Functinality End
+
+  // Redirect Function
+  const moveUser = (from, to) => {
+
+    return (
+      <Redirect from={from} to={to} />
+    )
+  }
 
   // Login Functinality Start
   const handleLoginInput = ({ target }) => {
@@ -88,7 +97,7 @@ const FormContext = () => {
 
     if (response.status === 400) {
       setErrors(response.data)
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       setErrors({})
       setLogin({
         email: '',

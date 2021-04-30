@@ -2,11 +2,9 @@
 import { Container } from '@material-ui/core'
 
 
-import styles from '../styles/styles.js'
 import Auth from '../components/Auth'
 
 const Login = () => {
-  const classes = styles()
 
   return (
     <main>
