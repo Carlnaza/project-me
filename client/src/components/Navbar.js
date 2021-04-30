@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from '@material-ui/core';
 
@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 const Navbar = () => {
   const classes = useStyles();
   const [menu, setMenu] = useState('')
+  const history = useHistory()
 
   const toggleOpen = (event) => {
     menu ? setMenu('') : setMenu(event.currentTarget)
@@ -86,7 +87,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('user')
-    window.location = '/login'
+    history.push('/login')
   }
 
   const renderMobileMenu = (
@@ -106,17 +107,17 @@ const Navbar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={(() => window.location = '/profile')}>
+      <MenuItem onClick={(() => history.push('/profile'))}>
         <IconButton color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem >
+      <MenuItem onClick={handleLogOut} >
         <IconButton color="inherit">
           <ExitToAppIcon />
         </IconButton>
-        <Typography onClick={handleLogOut} className={classes.logOut} style={{ cursor: 'pointer' }}>Log Out</Typography>
+        <Typography className={classes.logOut} style={{ cursor: 'pointer' }}>Log Out</Typography>
       </MenuItem>
     </Menu>
   );
@@ -139,7 +140,7 @@ const Navbar = () => {
               <Typography
                 variant="h6"
                 className={classes.title}
-                onClick={(() => window.location = '/')}
+                onClick={(() => history.push('/'))}
                 noWrap>
                 Project Me
               </Typography>
@@ -162,7 +163,7 @@ const Navbar = () => {
                     <NotificationsIcon />
                   </Badge>
                 </IconButton>
-                <IconButton color="inherit" onClick={(() => window.location = '/profile')}>
+                <IconButton color="inherit" onClick={(() => history.push('/profile'))}>
                   <Badge color="secondary">
                     <AccountCircle />
                   </Badge>

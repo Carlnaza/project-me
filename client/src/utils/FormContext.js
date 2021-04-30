@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { User } from '../utils'
+import { useHistory } from 'react-router-dom'
 
 const FormContext = () => {
+
+  const history = useHistory()
 
   const [errors, setErrors] = useState({})
 
@@ -67,7 +70,7 @@ const FormContext = () => {
       console.log(response)
       // set logic so that snack alert is triggered with response.message if it contains success and register
       // add time before being sent to login
-      window.location = '/login'
+      history.push('/login')
     }
   }
   // Register Functinality End
@@ -86,27 +89,26 @@ const FormContext = () => {
     console.log(user)
     let response = await User.login(user)
     console.log(response)
-    // if (response.status === 400) {
-    //   setErrors(response.data)
-    // } else if (response.status == 200) {
-    //   setErrors({})
-    //   setLogin({
-    //     email: '',
-    //     password: ''
-    //   })
-    //   console.log(response.token)
-    //   localStorage.setItem('user', response.token)
-    //   // set logic so that snack alert is triggered with response.message if it contains success and login
-    //   // add time before being sent to home
-    //   // window.location = '/'
+    if (response.status === 400) {
+      setErrors(response.data)
+    } else if (response.status == 200) {
+      setErrors({})
+      setLogin({
+        email: '',
+        password: ''
+      })
+      console.log(response.token)
+      localStorage.setItem('user', response.token)
+      //   // set logic so that snack alert is triggered with response.message if it contains success and login
 
-    // }
+      history.push('/')
+    }
   }
   // Login Functinality End
 
   // Load User Information for a Loaded Profile Form
   const loadUser = async () => {
-    const { data } = await User.getData()
+    const data = await User.getData()
     let user = {}
     user.name = data.name ? data.name : ''
     user.username = data.username ? data.name : ''
