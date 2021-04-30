@@ -6,19 +6,40 @@ const styles = makeStyles((theme) => ({
   },
   loginCard: {
     justifyContent: 'center',
-    padding: '10px'
+    padding: '25px',
+    width: '500px'
   },
   centeredFlex: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    placeContent: 'center',
+    flexWrap: 'wrap'
   },
   input: {
-    margin: '10px 5px',
-    flex: 1
+    width: '100%'
   },
   hide: {
     display: 'none'
+  },
+  button: {
+    width: '100%',
+    margin: '16px 0px'
+  },
+  link: {
+    textDecoration: 'none'
+  },
+  dayYear: {
+    flexGrow: 1,
+    marginLeft: '10px',
+    marginTop: '16px',
+    marginBottom: '8px'
+  },
+  month: {
+    flexGrow: 2,
+    marginTop: '16px',
+    marginBottom: '8px'
   }
+
 }))
 
 export default styles
