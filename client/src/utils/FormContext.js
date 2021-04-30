@@ -75,14 +75,6 @@ const FormContext = () => {
   }
   // Register Functinality End
 
-  // Redirect Function
-  const moveUser = (from, to) => {
-
-    return (
-      <Redirect from={from} to={to} />
-    )
-  }
-
   // Login Functinality Start
   const handleLoginInput = ({ target }) => {
     setLogin({ ...login, [target.name]: target.value })
