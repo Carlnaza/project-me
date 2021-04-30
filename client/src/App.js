@@ -7,7 +7,7 @@ function App() {
   return (
 
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Router>
         <Switch>
 
