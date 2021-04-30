@@ -6,7 +6,6 @@ import { LockedPage } from './utils'
 function App() {
   return (
     <div>
-      <Navbar />
       <Switch>
         <Route exact path='/'>
           <Redirect to='/home' />
