@@ -75,6 +75,14 @@ const FormContext = () => {
   }
   // Register Functinality End
 
+  // Redirect Function
+  const moveUser = (from, to) => {
+
+    return (
+      <Redirect from={from} to={to} />
+    )
+  }
+
   // Login Functinality Start
   const handleLoginInput = ({ target }) => {
     setLogin({ ...login, [target.name]: target.value })
@@ -91,7 +99,7 @@ const FormContext = () => {
     console.log(response)
     if (response.status === 400) {
       setErrors(response.data)
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       setErrors({})
       setLogin({
         email: '',

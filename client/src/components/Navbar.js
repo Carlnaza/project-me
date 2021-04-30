@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from '@material-ui/core';
 
-import { Menu as MenuIcon, Search as SearchIcon, AccountCircle, Mail as MailIcon, Notifications as NotificationsIcon, MoreVert as MoreIcon, ExitToApp as ExitToAppIcon } from '@material-ui/icons';
+import { Menu as MenuIcon, Search as SearchIcon, AccountCircle, Notifications as NotificationsIcon, MoreVert as MoreIcon, ExitToApp as ExitToAppIcon } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({

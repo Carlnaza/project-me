@@ -10,21 +10,21 @@ import DateFnsUtils from '@date-io/date-fns'; // choose your lib
 import MuiPhoneNumber from 'material-ui-phone-number'
 import { FormContext } from '../utils'
 import styles from '../styles/styles.js'
+import { useEffect } from 'react';
 
 
 const Auth = ({ page }) => {
   const classes = styles()
 
   const {
-    register, setRegister,
+    register,
     dob, setDOB,
     phone, setPhone,
     handleRegisterInput,
     handleRegisterSubmit,
-    login, setLogin,
+    login,
     handleLoginInput,
     handleLoginSubmit,
-    errors
   } = FormContext()
 
   return (
@@ -35,12 +35,12 @@ const Auth = ({ page }) => {
             <Typography variant="h4">
               {page}
             </Typography>
-            {page == 'Register' && (
+            {page === 'Register' && (
               <>
                 <TextField
                   className={classes.input}
                   required
-                  fullwidth
+                  fullWidth
                   variant="outlined"
                   margin="normal"
                   InputLabelProps={{
@@ -85,7 +85,7 @@ const Auth = ({ page }) => {
             <TextField
               className={classes.input}
               required
-              fullwidth
+              fullWidth
               variant="outlined"
               margin="normal"
               InputLabelProps={{
@@ -95,13 +95,13 @@ const Auth = ({ page }) => {
               label="Email Address"
               placeholder="john123@email.com"
               name="email"
-              value={page == 'Register' ? register.email : login.email}
-              onChange={page == 'Register' ? handleRegisterInput : handleLoginInput}
+              value={page === 'Register' ? register.email : login.email}
+              onChange={page === 'Register' ? handleRegisterInput : handleLoginInput}
             />
             <TextField
               className={classes.input}
               required
-              fullwidth
+              fullWidth
               variant="outlined"
               margin="normal"
               InputLabelProps={{
@@ -111,15 +111,15 @@ const Auth = ({ page }) => {
               type="password"
               label="Password"
               name="password"
-              value={page == 'Register' ? register.password : login.password}
-              onChange={page == 'Register' ? handleRegisterInput : handleLoginInput}
+              value={page === 'Register' ? register.password : login.password}
+              onChange={page === 'Register' ? handleRegisterInput : handleLoginInput}
             />
 
-            {page == 'Register' &&
+            {page === 'Register' &&
               (<TextField
                 className={classes.input}
                 required
-                fullwidth
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -134,8 +134,8 @@ const Auth = ({ page }) => {
               />)
             }
           </Grid>
-          <Button type='submit' onClick={page == 'Register' ? handleRegisterSubmit : handleLoginSubmit}>Submit</Button>
-          {page == 'Register' ?
+          <Button type='submit' onClick={page === 'Register' ? handleRegisterSubmit : handleLoginSubmit}>Submit</Button>
+          {page === 'Register' ?
             <Link to='/login'>Already Registered? Login Here</Link>
             :
             <Link to='/register'>Don't Have an Account? Register Here</Link>

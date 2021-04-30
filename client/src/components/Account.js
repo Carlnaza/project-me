@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Card, Grid, Typography, TextField, Box, Button, FormControl, InputLabel, Select } from '@material-ui/core'
+import { Card, Grid, Typography, TextField, Box, Button, FormControl, InputLabel, Select } from '@material-ui/core'
 
 import {
   KeyboardDatePicker,
@@ -12,19 +11,18 @@ import MuiPhoneNumber from 'material-ui-phone-number'
 import { FormContext } from '../utils'
 import styles from '../styles/styles.js'
 
-const Account = (page) => {
+const Account = () => {
   const classes = styles()
 
   const {
     loadUser,
     dob, setDOB,
     phone, setPhone,
-    edit, setEdit,
+    edit,
     handleEditProfile,
     handleSubmitEdit,
     toggleDisable,
-    disabled,
-    errors
+    disabled
   } = FormContext()
 
   useEffect(() => {
