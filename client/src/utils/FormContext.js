@@ -14,7 +14,11 @@ const FormContext = () => {
     username: '',
     password: '',
     password2: '',
-    phone: ''
+    dob: '',
+    phone: '',
+    month: '',
+    day: '',
+    year: '',
   })
 
   const [login, setLogin] = useState({
@@ -25,9 +29,43 @@ const FormContext = () => {
 
   const [edit, setEdit] = useState({})
   // DatePicker and MuiPhoneNumber doesn't work with target.name setup of handleinput
-  const [dob, setDOB] = useState(new Date());
+  const [dob, setDOB] = useState();
   const [phone, setPhone] = useState();
   const [disabled, setDisabled] = useState(true);
+  const [success, setSuccess] = useState(false)
+
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+  const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31]
+  const currentYear = new Date().getFullYear()
+  let startYear = 1900
+  let years = []
+  while (startYear <= currentYear) {
+    years.push(startYear++)
+  }
+
+  const toggleSuccessSnack = (key) => {
+    setSuccess(!success)
+  }
+
+  const handleCloseSnack = (key) => {
+    if (errors[key]) {
+      setErrors({ ...errors, [key]: '' })
+    }
+    console.log(key)
+  }
 
   // Form Interaction Set to Disable
   const toggleDisable = () => {
@@ -36,7 +74,16 @@ const FormContext = () => {
 
   // Register Functinality Start
   const handleRegisterInput = ({ target }) => {
-    setRegister({ ...register, [target.name]: target.value })
+    if (target.name === 'phone') {
+      let phone = target.value.replace(/\D/g, '')
+      const match = phone.match(/^(\d{1,3})(\d{0,3})(\d{0,4})$/)
+      if (match) {
+        phone = `(${match[1]})${match[2] ? ' ' : ''}${match[2]}${match[3] ? '-' : ''}${match[3]}`;
+      }
+      setRegister({ ...register, [target.name]: phone })
+    } else {
+      setRegister({ ...register, [target.name]: target.value })
+    }
   }
 
   const handleRegisterSubmit = async (event) => {
@@ -45,8 +92,8 @@ const FormContext = () => {
       name: register.name,
       email: register.email,
       // username: register.username,
-      dateOfBirth: dob.valueOf(),
-      phone: phone ? parseInt(phone.replace(/\D/g, '')) : '',
+      dateOfBirth: `${register.year}-${register.month}-${register.day}`,
+      phone: parseInt(register.phone.replace(/\D/g, '')),
       password: register.password,
       password2: register.password2
     }
@@ -56,8 +103,10 @@ const FormContext = () => {
     console.log(response)
     if (response.status === 400) {
       setErrors(response.data)
+      console.log(response.data)
     } else if (response.status === 200) {
       setErrors({})
+      toggleSuccessSnack()
       setRegister({
         name: '',
         email: '',
@@ -68,7 +117,6 @@ const FormContext = () => {
       setDOB(new Date())
       setPhone('')
       console.log(response)
-      // set logic so that snack alert is triggered with response.message if it contains success and register
       // add time before being sent to login
       history.push('/login')
     }
@@ -93,13 +141,14 @@ const FormContext = () => {
       setErrors(response.data)
     } else if (response.status === 200) {
       setErrors({})
+      toggleSuccessSnack()
       setLogin({
         email: '',
         password: ''
       })
       console.log(response.token)
       localStorage.setItem('user', response.token)
-      //   // set logic so that snack alert is triggered with response.message if it contains success and login
+      // add time before being sent to login
 
       history.push('/')
     }
@@ -149,7 +198,7 @@ const FormContext = () => {
       username: edit.username,
       profilePhoto: edit.profilePhoto,
       address: edit.address,
-      dateOfBirth: dob.valueOf(),
+      dateOfBirth: edit.dob,
       phone: parseInt(phone.replace(/\D/g, ''))
     }
 
@@ -170,7 +219,8 @@ const FormContext = () => {
     dob, setDOB, phone, setPhone,
     errors, setErrors,
     loadUser, edit, setEdit, handleEditProfile, handleSubmitEdit,
-    toggleDisable, disabled
+    toggleDisable, disabled, handleCloseSnack, toggleSuccessSnack, success,
+    years, days, months
   }
 
 }
