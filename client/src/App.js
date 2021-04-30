@@ -1,6 +1,5 @@
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { Home, Login, Register, Profile } from './pages'
-import Navbar from './components/Navbar'
 import { LockedPage } from './utils'
 
 function App() {

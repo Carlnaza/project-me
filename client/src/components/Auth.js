@@ -1,25 +1,16 @@
 import { Link, Redirect } from 'react-router-dom'
-import { Card, Grid, Typography, TextField, Box, Button, Snackbar, FormControl, InputLabel, Select } from '@material-ui/core'
+import { Grid, Typography, TextField, Button, Snackbar, FormControl, InputLabel, Select } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns'; // choose your lib
 
-import MuiPhoneNumber from 'material-ui-phone-number'
 import { FormContext } from '../utils'
 import styles from '../styles/styles.js'
-import { useEffect, useState } from 'react';
 
 const Auth = ({ page }) => {
   const classes = styles()
 
   const {
     register,
-    dob, setDOB,
-    phone, setPhone,
     handleRegisterInput,
     handleRegisterSubmit,
     login,
@@ -180,7 +171,7 @@ const Auth = ({ page }) => {
                     <Typography variant="h6">
                       Confirm your age
                 </Typography>
-                    <Typography variant="p">
+                    <Typography variant="body1">
                       Your date of birth will not be shown publicly
                 </Typography>
                   </div>
@@ -246,7 +237,7 @@ const Auth = ({ page }) => {
               Submit
               </Button>
             {page === 'Register' ?
-              <Typography variant="p">
+              <Typography variant="body1">
                 <Link
                   className={classes.link}
                   to='/login'>
@@ -254,7 +245,7 @@ const Auth = ({ page }) => {
                 </Link>
               </Typography>
               :
-              <Typography variant="p">
+              <Typography variant="body1">
                 <Link
                   className={classes.link}
                   to='/register'>

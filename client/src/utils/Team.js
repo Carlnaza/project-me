@@ -1,4 +1,3 @@
-import axios from 'axios'
 
 const Team = {
   create: (body) => fetch('/api/team', {

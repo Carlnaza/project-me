@@ -1,4 +1,4 @@
-import axios from 'axios'
+
 
 const Post = {
   create: (body) => fetch('/api/project', {

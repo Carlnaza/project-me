@@ -29,7 +29,6 @@ const FormContext = () => {
 
   const [edit, setEdit] = useState({})
   // DatePicker and MuiPhoneNumber doesn't work with target.name setup of handleinput
-  const [dob, setDOB] = useState();
   const [phone, setPhone] = useState();
   const [disabled, setDisabled] = useState(true);
   const [success, setSuccess] = useState(false)
@@ -112,9 +111,13 @@ const FormContext = () => {
         email: '',
         username: '',
         password: '',
-        password2: ''
+        password2: '',
+        dob: '',
+        phone: '',
+        month: '',
+        day: '',
+        year: '',
       })
-      setDOB(new Date())
       setPhone('')
       console.log(response)
       // add time before being sent to login
@@ -174,7 +177,6 @@ const FormContext = () => {
 
     setEdit(user)
     setPhone(data.phone.toString())
-    setDOB(data.dateOfBirth)
   }
 
   // Profile Edit Functionality Start
@@ -195,7 +197,6 @@ const FormContext = () => {
       email: edit.email,
       username: edit.username,
       gender: edit.gender,
-      username: edit.username,
       profilePhoto: edit.profilePhoto,
       address: edit.address,
       dateOfBirth: edit.dob,
@@ -216,7 +217,7 @@ const FormContext = () => {
   return {
     register, setRegister, handleRegisterInput, handleRegisterSubmit,
     login, setLogin, handleLoginInput, handleLoginSubmit,
-    dob, setDOB, phone, setPhone,
+    // dob, setDOB, phone, setPhone,
     errors, setErrors,
     loadUser, edit, setEdit, handleEditProfile, handleSubmitEdit,
     toggleDisable, disabled, handleCloseSnack, toggleSuccessSnack, success,
