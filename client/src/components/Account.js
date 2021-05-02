@@ -1,15 +1,26 @@
 import { useEffect } from 'react'
-import { Card, Grid, Typography, TextField, Box, Button, FormControl, InputLabel, Select } from '@material-ui/core'
 
+// Library
+import { Grid, Typography, TextField, Box, Button } from '@material-ui/core'
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
-
 import MuiPhoneNumber from 'material-ui-phone-number'
-import { FormContext } from '../utils'
 import styles from '../styles/styles.js'
+import { makeStyles } from '@material-ui/core/styles'
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+// Utils
+import { FormContext } from '../utils'
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark"
+  }
+});
 
 const Account = () => {
   const classes = styles()
@@ -31,21 +42,19 @@ const Account = () => {
 
 
   return (
-    <>
-      <Card className={classes.loginCard}>
+    <ThemeProvider theme={theme}>
+      <div className={classes.loginCard}>
         {/* <form onSubmit={ }> */}
         <form>
           <Grid container direction="column" >
-            <Typography variant="h4">
-              Account Overview
-            </Typography>
             <Box className={classes.centeredFlex}>
               <TextField
                 disabled={disabled}
                 label="Full Name"
                 className={classes.input}
                 required
-                fullwidth
+                size="small"
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -55,10 +64,14 @@ const Account = () => {
                 value={edit.name}
                 onChange={handleEditProfile}
               />
-              <FormControl variant="outlined" className={classes.input} disabled={disabled}>
+              {/* <Grid xs={6} item>
+              <FormControl fullWidth size="small" variant="outlined" disabled={disabled}>
                 <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
                 <Select
                   native
+                  size="small"
+                  fullWidth
+                  margin="normal"
                   value={edit.gender}
                   onChange={handleEditProfile}
                   label="Gender"
@@ -66,12 +79,12 @@ const Account = () => {
                     name: 'gender',
                   }}
                 >
-                  {/* <option aria-label="None" value="" /> */}
                   <option value={'Male'}>Male</option>
                   <option value={'Female'}>Female</option>
                   <option value={'Other'}>Other</option>
                 </Select>
               </FormControl>
+            </Grid> */}
             </Box>
             <Box className={classes.centeredFlex}>
               <MuiPickersUtilsProvider utils={DateFnsUtils} >
@@ -79,9 +92,10 @@ const Account = () => {
                   disabled={disabled}
                   label="Date of Birth"
                   className={classes.input}
+                  size="small"
+                  margin="normal"
                   required
                   variant="outlined"
-                  margin="normal"
                   inputVariant="outlined"
                   value={dob}
                   onChange={data => setDOB(data.valueOf())}
@@ -93,6 +107,7 @@ const Account = () => {
                 label="Phone Number"
                 className={classes.input}
                 required
+                size="small"
                 disableAreaCodes
                 variant="outlined"
                 margin="normal"
@@ -108,7 +123,8 @@ const Account = () => {
                 label="Street"
                 className={classes.input}
                 required
-                fullwidth
+                size="small"
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -123,7 +139,8 @@ const Account = () => {
                 label="Apt / Suite / Other"
                 className={classes.input}
                 required
-                fullwidth
+                size="small"
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -140,7 +157,8 @@ const Account = () => {
                 label="City"
                 className={classes.input}
                 required
-                fullwidth
+                size="small"
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -156,7 +174,8 @@ const Account = () => {
                 label="Zip Code"
                 className={classes.input}
                 required
-                fullwidth
+                size="small"
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -172,7 +191,8 @@ const Account = () => {
                 label="Country"
                 className={classes.input}
                 required
-                fullwidth
+                size="small"
+                fullWidth
                 variant="outlined"
                 margin="normal"
                 InputLabelProps={{
@@ -188,7 +208,8 @@ const Account = () => {
             <TextField
               className={classes.input}
               required
-              fullwidth
+              size="small"
+              fullWidth
               variant="outlined"
               margin="normal"
               InputLabelProps={{
@@ -205,7 +226,8 @@ const Account = () => {
             <TextField
               className={classes.input}
               required
-              fullwidth
+              size="small"
+              fullWidth
               variant="outlined"
               margin="normal"
               InputLabelProps={{
@@ -226,17 +248,25 @@ const Account = () => {
 
           <Button
             onClick={handleSubmitEdit}
-            className={disabled && classes.hide}>
+            className={disabled && classes.hide}
+            color="primary"
+            variant="contained"
+          >
             Save
           </Button>
         </form>
-        <Button
-          onClick={toggleDisable}
-          className={!disabled && classes.hide}>
-          Edit Profile
+        <Grid container direction="row-reverse">
+          <Button
+            onClick={toggleDisable}
+            className={!disabled && classes.hide}
+            color="secondary"
+            variant="contained"
+          >
+            Edit Profile
           </Button>
-      </Card>
-    </>
+        </Grid>
+      </div>
+    </ThemeProvider>
   )
 }
 

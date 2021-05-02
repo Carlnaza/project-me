@@ -164,7 +164,7 @@ const FormContext = () => {
     let user = {}
     user.name = data.name ? data.name : ''
     user.username = data.username ? data.name : ''
-    user.gender = data.gender ? data.name : ''
+    user.gender = data.gender ? data.gender : ''
     user.email = data.email ? data.email : ''
     user.address = data.address ? {
       line1: data.address.line1 ? data.address.line1 : '',
@@ -174,7 +174,7 @@ const FormContext = () => {
       country: data.address.country ? data.address.country : ''
     } : { line1: '', line2: '', city: '', zipCode: '', country: '' }
     user.profilePhoto = data.profilePhoto ? data.profilePhoto : ''
-
+    console.log(user)
     setEdit(user)
     setPhone(data.phone.toString())
   }

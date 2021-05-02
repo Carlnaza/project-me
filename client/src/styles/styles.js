@@ -38,6 +38,9 @@ const styles = makeStyles((theme) => ({
     flexGrow: 2,
     marginTop: '16px',
     marginBottom: '8px'
+  },
+  darkMode: {
+    color: "white"
   }
 
 }))
