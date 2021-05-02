@@ -262,7 +262,7 @@ const Account = () => {
             color="secondary"
             variant="contained"
           >
-            Edit Profile
+            Edit
           </Button>
         </Grid>
       </div>
