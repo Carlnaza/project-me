@@ -7,7 +7,7 @@ const FormContext = () => {
   const history = useHistory()
 
   const [errors, setErrors] = useState({})
-
+  const [isLoading, setIsLoading] = useState(false)
   const [register, setRegister] = useState({
     name: '',
     email: '',
@@ -177,6 +177,7 @@ const FormContext = () => {
     console.log(user)
     setEdit(user)
     setPhone(data.phone.toString())
+    setIsLoading(false)
   }
 
   // Profile Edit Functionality Start
@@ -221,7 +222,8 @@ const FormContext = () => {
     errors, setErrors,
     loadUser, edit, setEdit, handleEditProfile, handleSubmitEdit,
     toggleDisable, disabled, handleCloseSnack, toggleSuccessSnack, success,
-    years, days, months
+    years, days, months,
+    isLoading, setIsLoading
   }
 
 }
